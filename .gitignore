@@ -1,0 +1,12 @@
+# Exclude data folder
+data/
+
+# Common Python/PyCharm ignores
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+.env
+.idea/

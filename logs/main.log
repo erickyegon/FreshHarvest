@@ -1,0 +1,44 @@
+2025-03-31 09:23:29,829 - main - INFO - Starting training mode
+2025-03-31 09:25:11,170 - main - INFO - Starting training mode
+2025-03-31 09:27:43,781 - main - INFO - Starting training mode
+2025-03-31 09:36:56,169 - main - INFO - Starting training mode
+2025-03-31 09:38:56,799 - main - INFO - Model Architecture: FruitFreshnessClassifier
+Total Parameters: 4,010,110
+Trainable Parameters: 4,010,110
+Non-trainable Parameters: 0
+2025-03-31 09:38:56,799 - main - INFO - Training for 10 epochs...
+2025-03-31 09:42:30,454 - main - INFO - Starting training mode
+2025-03-31 09:43:14,553 - main - INFO - Model Architecture: FruitFreshnessClassifier
+Total Parameters: 4,010,110
+Trainable Parameters: 4,010,110
+Non-trainable Parameters: 0
+2025-03-31 09:43:14,554 - main - INFO - Training for 10 epochs...
+2025-03-31 16:35:58,750 - main - INFO - Training completed in 412m 44s
+2025-03-31 16:35:58,837 - main - INFO - Model saved to model_outputs\final_model.pt
+2025-03-31 16:35:58,838 - main - INFO - Evaluating model on test set...
+2025-03-31 16:39:21,201 - main - INFO - Test Accuracy: 0.9996
+2025-03-31 16:39:21,222 - main - INFO - Test Precision: 0.9996
+2025-03-31 16:39:21,224 - main - INFO - Test Recall: 0.9996
+2025-03-31 16:39:21,227 - main - INFO - Test F1 Score: 0.9996
+2025-03-31 16:39:21,231 - main - INFO - Training mode completed
+2025-03-31 16:40:18,286 - main - INFO - Starting evaluation mode
+2025-03-31 16:40:18,286 - main - INFO - Loading model from model_outputs/final_model.pt
+2025-03-31 16:40:19,479 - main - INFO - Evaluating model on test set...
+2025-03-31 16:43:59,204 - main - INFO - Test Accuracy: 0.9996
+2025-03-31 16:43:59,204 - main - INFO - Test Precision: 0.9996
+2025-03-31 16:43:59,205 - main - INFO - Test Recall: 0.9996
+2025-03-31 16:43:59,205 - main - INFO - Test F1 Score: 0.9996
+2025-03-31 16:43:59,205 - main - INFO - Evaluation mode completed
+2025-03-31 16:44:41,021 - main - INFO - Starting prediction mode
+2025-03-31 16:44:41,022 - main - INFO - Running: python predict.py --model-path model_outputs/final_model.pt --input path/to/image.jpg --output-dir output
+2025-03-31 16:44:41,259 - main - INFO - Prediction mode completed
+2025-03-31 16:46:36,970 - main - INFO - Starting server mode
+2025-03-31 16:46:37,063 - main - INFO - Starting web server with model model_outputs/final_model.pt
+2025-03-31 16:46:37,064 - main - INFO - Access the web interface at http://localhost:5000
+2025-03-31 16:46:37,337 - main - INFO - Server mode completed
+2025-03-31 17:27:01,267 - main - INFO - Starting prediction mode
+2025-03-31 17:27:01,267 - main - INFO - Running: python predict.py --model-path model_outputs/final_model.pt --input path/to/image.jpg --output-dir output
+2025-03-31 17:27:01,419 - main - INFO - Prediction mode completed
+2025-03-31 17:27:56,854 - main - INFO - Starting prediction mode
+2025-03-31 17:27:56,855 - main - INFO - Running: python predict.py --model-path model_outputs/final_model.pt --input path/to/image.jpg --output-dir output
+2025-03-31 17:27:56,989 - main - INFO - Prediction mode completed

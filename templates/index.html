@@ -1,0 +1,142 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>FreshHarvest - Fruit Freshness Detection</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+            .container { max-width: 800px; margin: 0 auto; }
+            h1 { color: #2C8C3C; }
+            .upload-area { border: 2px dashed #ccc; padding: 20px; text-align: center; margin: 20px 0; }
+            .upload-area:hover { border-color: #2C8C3C; }
+            .btn { background-color: #2C8C3C; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+            .btn:hover { background-color: #236C2E; }
+            .result { margin-top: 20px; display: none; }
+            img { max-width: 100%; }
+            .error { color: red; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>FreshHarvest Fruit Freshness Detection</h1>
+            
+            {% if not model_loaded %}
+            <div class="error">
+                <p>Error: Model not loaded. Please check the model path.</p>
+            </div>
+            {% else %}
+            <p>Upload an image of a fruit to detect its freshness.</p>
+            
+            <div class="upload-area" id="drop-area">
+                <form id="upload-form" enctype="multipart/form-data">
+                    <input type="file" id="file-input" name="file" accept=".jpg,.jpeg,.png,.bmp" style="display: none;">
+                    <label for="file-input" class="btn">Select Image</label>
+                    <p>Or drag and drop an image here</p>
+                </form>
+            </div>
+            
+            <div id="result" class="result">
+                <h2>Prediction: <span id="prediction"></span></h2>
+                <p>Confidence: <span id="confidence"></span></p>
+                <p>Inference Time: <span id="inference-time"></span> seconds</p>
+                
+                <div id="image-container">
+                    <img id="result-image" src="" alt="Annotated Image">
+                </div>
+            </div>
+            
+            <script>
+                // Handle file upload
+                const dropArea = document.getElementById('drop-area');
+                const fileInput = document.getElementById('file-input');
+                const resultDiv = document.getElementById('result');
+                
+                // Prevent default drag behaviors
+                ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                    dropArea.addEventListener(eventName, preventDefaults, false);
+                });
+                
+                function preventDefaults(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                
+                // Highlight drop area when dragging over it
+                ['dragenter', 'dragover'].forEach(eventName => {
+                    dropArea.addEventListener(eventName, highlight, false);
+                });
+                
+                ['dragleave', 'drop'].forEach(eventName => {
+                    dropArea.addEventListener(eventName, unhighlight, false);
+                });
+                
+                function highlight() {
+                    dropArea.classList.add('highlight');
+                }
+                
+                function unhighlight() {
+                    dropArea.classList.remove('highlight');
+                }
+                
+                // Handle dropped files
+                dropArea.addEventListener('drop', handleDrop, false);
+                
+                function handleDrop(e) {
+                    const dt = e.dataTransfer;
+                    const files = dt.files;
+                    
+                    if (files.length > 0) {
+                        handleFiles(files);
+                    }
+                }
+                
+                // Handle selected files
+                fileInput.addEventListener('change', function() {
+                    handleFiles(this.files);
+                });
+                
+                function handleFiles(files) {
+                    const file = files[0];
+                    uploadFile(file);
+                }
+                
+                function uploadFile(file) {
+                    const formData = new FormData();
+                    formData.append('file', file);
+                    
+                    fetch('/upload', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            alert(data.error);
+                            return;
+                        }
+                        
+                        // Display results
+                        document.getElementById('prediction').textContent = data.prediction;
+                        document.getElementById('confidence').textContent = (data.confidence * 100).toFixed(2) + '%';
+                        document.getElementById('inference-time').textContent = data.inference_time.toFixed(3);
+                        document.getElementById('result-image').src = 'data:image/jpeg;base64,' + data.image_base64;
+                        
+                        // Show result div
+                        resultDiv.style.display = 'block';
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred during upload.');
+                    });
+                }
+            </script>
+            {% endif %}
+            
+            <div style="margin-top: 40px; border-top: 1px solid #ccc; padding-top: 20px;">
+                <p><a href="/about">About</a> | FreshHarvest Fruit Freshness Detection</p>
+            </div>
+        </div>
+    </body>
+    </html>
+    

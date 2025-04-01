@@ -1,0 +1,40 @@
+2025-03-31 09:43:14,598 - trainer - INFO - Epoch 1/10
+2025-03-31 10:24:47,469 - trainer - INFO - Train Loss: 0.1161, Train Acc: 0.9605
+2025-03-31 10:24:47,471 - trainer - INFO - Val Loss: 0.0192, Val Acc: 0.9942
+2025-03-31 10:24:47,588 - trainer - INFO - Epoch 2/10
+2025-03-31 11:04:46,405 - trainer - INFO - Train Loss: 0.0197, Train Acc: 0.9945
+2025-03-31 11:04:46,406 - trainer - INFO - Val Loss: 0.0103, Val Acc: 0.9979
+2025-03-31 11:04:46,501 - trainer - INFO - Epoch 3/10
+2025-03-31 11:45:16,698 - trainer - INFO - Train Loss: 0.0167, Train Acc: 0.9951
+2025-03-31 11:45:16,698 - trainer - INFO - Val Loss: 0.0063, Val Acc: 0.9975
+2025-03-31 11:45:16,747 - trainer - INFO - Epoch 4/10
+2025-03-31 12:26:46,120 - trainer - INFO - Train Loss: 0.0120, Train Acc: 0.9962
+2025-03-31 12:26:46,120 - trainer - INFO - Val Loss: 0.0054, Val Acc: 0.9975
+2025-03-31 12:26:46,168 - trainer - INFO - Epoch 5/10
+2025-03-31 13:07:33,002 - trainer - INFO - Train Loss: 0.0072, Train Acc: 0.9978
+2025-03-31 13:07:33,002 - trainer - INFO - Val Loss: 0.0043, Val Acc: 0.9983
+2025-03-31 13:07:33,085 - trainer - INFO - Epoch 6/10
+2025-03-31 13:50:50,291 - trainer - INFO - Train Loss: 0.0062, Train Acc: 0.9980
+2025-03-31 13:50:50,292 - trainer - INFO - Val Loss: 0.0021, Val Acc: 0.9992
+2025-03-31 13:50:50,387 - trainer - INFO - Epoch 7/10
+2025-03-31 14:31:48,091 - trainer - INFO - Train Loss: 0.0068, Train Acc: 0.9981
+2025-03-31 14:31:48,091 - trainer - INFO - Val Loss: 0.0016, Val Acc: 0.9992
+2025-03-31 14:31:48,136 - trainer - INFO - Epoch 8/10
+2025-03-31 15:12:51,029 - trainer - INFO - Train Loss: 0.0025, Train Acc: 0.9994
+2025-03-31 15:12:51,029 - trainer - INFO - Val Loss: 0.0007, Val Acc: 0.9996
+2025-03-31 15:12:51,132 - trainer - INFO - Epoch 9/10
+2025-03-31 15:54:12,263 - trainer - INFO - Train Loss: 0.0087, Train Acc: 0.9978
+2025-03-31 15:54:12,263 - trainer - INFO - Val Loss: 0.0011, Val Acc: 1.0000
+2025-03-31 15:54:12,304 - trainer - INFO - Epoch 10/10
+2025-03-31 16:35:58,709 - trainer - INFO - Train Loss: 0.0068, Train Acc: 0.9978
+2025-03-31 16:35:58,710 - trainer - INFO - Val Loss: 0.0022, Val Acc: 0.9987
+2025-03-31 16:35:58,711 - trainer - INFO - Training complete in 412m 44s
+2025-03-31 16:35:58,711 - trainer - INFO - Best validation accuracy: 1.0000
+2025-03-31 16:39:05,130 - trainer - INFO - Test Accuracy: 0.9996
+2025-03-31 16:39:05,130 - trainer - INFO - Test Precision: 0.9996
+2025-03-31 16:39:05,131 - trainer - INFO - Test Recall: 0.9996
+2025-03-31 16:39:05,131 - trainer - INFO - Test F1 Score: 0.9996
+2025-03-31 16:43:38,995 - trainer - INFO - Test Accuracy: 0.9996
+2025-03-31 16:43:38,995 - trainer - INFO - Test Precision: 0.9996
+2025-03-31 16:43:38,996 - trainer - INFO - Test Recall: 0.9996
+2025-03-31 16:43:38,996 - trainer - INFO - Test F1 Score: 0.9996
