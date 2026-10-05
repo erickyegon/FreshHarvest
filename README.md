@@ -206,4 +206,4 @@ This project is licensed under the MIT License. See `LICENSE` for details.
 - **Flask Developers:** For a lightweight web framework.
 - **Dataset Contributors:** For providing the FRUIT-16K dataset (assumed).
 
-*Created by Erick K Yegon, Machine Learning Specialist. Contact: keyegon@gmail.com*
+Author: Erick Kiprotich Yegon, epidemiologist and data scientist (real-world evidence, HEOR, causal inference) · Portfolio: https://erickyegon.github.io · LinkedIn: https://linkedin.com/in/erickyegon
