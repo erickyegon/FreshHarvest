@@ -1,7 +1,5 @@
 # FreshHarvest: Fruit Freshness Detection with Deep Learning
 
-![FreshHarvest Logo](https://via.placeholder.com/150) <!-- Replace with actual logo if available -->
-
 **FreshHarvest** is an advanced machine learning project designed to classify the freshness of fruits using state-of-the-art computer vision techniques. Leveraging deep learning models and a robust dataset, this project provides an end-to-end solution for detecting whether a fruit is fresh or spoiled. It includes a modular codebase, a Flask-based web interface for real-time predictions, and comprehensive evaluation tools, making it a versatile tool for both research and practical deployment in agriculture or food quality assurance.
 
 This project demonstrates expertise in deep learning, computer vision, data engineering, and software development, showcasing skills in model training, optimization, deployment, and user interface design.
@@ -47,7 +45,7 @@ This project is built with modularity and scalability in mind, making it easy to
 - **Transfer Learning:** Utilize pre-trained weights from ImageNet with options to freeze/unfreeze the backbone.
 - **Data Augmentation:** Robust preprocessing with random flips, rotations, and color jittering.
 - **Real-Time Inference:** Predict freshness on individual images or directories of images.
-- **Web Application:** Upload images via a Flask-based interface and view annotated results.
+- **Web Application:** Upload images via a Streamlit interface and view annotated results.
 - **Comprehensive Evaluation:** Generate detailed metrics and visualizations post-training.
 - **Modular Design:** Clean, reusable code separated into distinct modules (data, model, training, etc.).
 - **Early Stopping:** Prevent overfitting with configurable patience and minimum delta.
@@ -55,21 +53,13 @@ This project is built with modularity and scalability in mind, making it easy to
 
 ## Dataset
 
-The dataset used in FreshHarvest is the **FRUIT-16K** dataset (assumed structure based on code), stored at `C:/FreshHarvest Project/FreshHarvest_Dataset/FRUIT-16K`. It consists of images organized into folders prefixed with:
-- `F_`: Fresh fruits
-- `S_`: Spoiled fruits
+FreshHarvest expects a fruit and vegetable freshness image dataset (not included; supply your own path). Pass the dataset folder with `--data-path` (or set the `FRESHHARVEST_DATA` environment variable). Images must sit in folders prefixed with:
+- `F_`: Fresh fruits, for example `F_Banana/`
+- `S_`: Spoiled fruits, for example `S_Banana/`
 
-Supported fruit types include:
-- Banana
-- Lemon
-- Lulo
-- Mango
-- Orange
-- Strawberry
-- Tamarillo
-- Tomato
+The code was developed against folders for banana, lemon, lulo, mango, orange, strawberry, tamarillo and tomato; any fruit that follows the `F_<name>` / `S_<name>` convention works.
 
-The dataset is split into training (70%), validation (15%), and testing (15%) sets with stratification to maintain class balance. Images are resized to 224x224 pixels and normalized using ImageNet statistics (`mean=[0.485, 0.456, 0.406]`, `std=[0.229, 0.224, 0.225]`).
+The dataset is split into training (70%), validation (15%) and testing (15%) sets. Images are resized to 224x224 pixels and normalized using ImageNet statistics (`mean=[0.485, 0.456, 0.406]`, `std=[0.229, 0.224, 0.225]`).
 
 ## Technical Architecture
 
@@ -118,31 +108,54 @@ See `requirements.txt` for the full list.
 
 ### Setup Instructions
 
-1. **Clone the Repository:**
+1. **Clone the repository:**
 
+   ```bash
+   git clone https://github.com/erickyegon/FreshHarvest.git
+   cd FreshHarvest
+   ```
 
-2. **Install Dependencies:**
+2. **Install dependencies:**
 
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-3. **Set Up Dataset:**
-- Place the `FRUIT-16K` dataset at `C:/FreshHarvest Project/FreshHarvest_Dataset/FRUIT-16K`.
-- Ensure folder structure follows `F_<fruit_type>` and `S_<fruit_type>` conventions.
+3. **Set up the dataset:** put your images in `F_<fruit>/` and `S_<fruit>/` folders and note the parent folder's path. Pass it with `--data-path` in the commands below.
 
-4. **Verify Configuration:**
-- Update `config.py` if paths or parameters need customization.
+4. **Verify configuration:** edit `config.py` if you want different hyperparameters.
 
 ## Usage
 
+All modes run through `main.py`. Run it from the project root.
+
 ### Training the Model
 
-Train a new model with:
-- Outputs: Model checkpoint, training history, metrics, and visualizations in `model_outputs/run_<timestamp>`.
+```bash
+python main.py --mode train --data-path /path/to/dataset --epochs 5 --output-dir model_outputs
+```
+
+Saves `final_model.pt` to `--output-dir`, then evaluates on the held-out test split and logs accuracy, precision, recall and F1.
 
 ### Evaluating the Model
 
-Evaluate a trained model:
-- Access at `http://localhost:5000`.
-- Upload images to get predictions with annotated results.
+```bash
+python main.py --mode evaluate --model-path model_outputs/final_model.pt --data-path /path/to/dataset
+```
+
+### Making Predictions
+
+```bash
+python main.py --mode predict --model-path model_outputs/final_model.pt --input path/to/image_or_folder --save-annotated
+```
+
+### Running the Web Interface
+
+```bash
+python main.py --mode serve --model-path model_outputs/final_model.pt
+```
+
+Starts the Streamlit interface at `http://localhost:8501`.
 
 ## Scripts and Modules
 
@@ -162,18 +175,7 @@ Evaluate a trained model:
 
 ## Results and Performance
 
-The model achieves strong performance on the test set (example metrics):
-- **Accuracy:** ~92%
-- **Precision:** ~91%
-- **Recall:** ~93%
-- **F1-Score:** ~92%
-
-Visualizations include:
-- Training history (loss/accuracy vs. epoch).
-- Confusion matrix.
-- Prediction distribution for batch inference.
-
-Results vary based on architecture, dataset size, and training parameters. EfficientNet-B0 typically offers the best balance of accuracy and efficiency.
+No benchmark results are published for this repository. `--mode train` and `--mode evaluate` log test accuracy, precision, recall and F1 for whichever dataset and architecture you use.
 
 ## Future Improvements
 
@@ -204,6 +206,6 @@ This project is licensed under the MIT License. See `LICENSE` for details.
 - **PyTorch Team:** For an excellent deep learning framework.
 - **OpenCV Community:** For robust computer vision tools.
 - **Flask Developers:** For a lightweight web framework.
-- **Dataset Contributors:** For providing the FRUIT-16K dataset (assumed).
+- **Dataset:** a fruit and vegetable freshness image dataset (not included; supply your own path).
 
 Author: Erick Kiprotich Yegon, epidemiologist and data scientist (real-world evidence, HEOR, causal inference) · Portfolio: https://erickyegon.github.io · LinkedIn: https://linkedin.com/in/erickyegon

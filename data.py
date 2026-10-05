@@ -199,19 +199,20 @@ def split_dataset(df, train_split=TRAIN_SPLIT, val_split=VAL_SPLIT, stratify=Tru
     return train_df, val_df, test_df
 
 
-def get_data_loaders(batch_size=BATCH_SIZE, num_workers=NUM_WORKERS):
+def get_data_loaders(batch_size=BATCH_SIZE, num_workers=NUM_WORKERS, dataset_path=DATASET_PATH):
     """
     Create data loaders for training, validation, and testing
 
     Args:
         batch_size (int): Batch size for dataloaders
         num_workers (int): Number of workers for dataloaders
+        dataset_path (Path or str): Dataset directory (F_<fruit>/S_<fruit> folders)
 
     Returns:
         tuple: (train_loader, val_loader, test_loader, class_names)
     """
     # Create dataset DataFrame
-    df = create_dataset_dataframe()
+    df = create_dataset_dataframe(dataset_path)
 
     # Split dataset
     train_df, val_df, test_df = split_dataset(df)
@@ -314,7 +315,7 @@ def get_dataset_statistics():
         tuple: (mean, std) calculated on the entire dataset
     """
     # Create dataset DataFrame
-    df = create_dataset_dataframe()
+    df = create_dataset_dataframe(dataset_path)
 
     # Create a dataset with minimal transforms
     transform = transforms.Compose([

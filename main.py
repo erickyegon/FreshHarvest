@@ -10,15 +10,13 @@ import sys
 import subprocess
 from pathlib import Path
 
-# Configure paths based on your specific system layout
-PROJECT_ROOT = Path("C:/FreshHarvest")
-DATA_PATH = PROJECT_ROOT / "data" / "FreshHarvest_Dataset" / "FRUIT-16K"
-OUTPUT_DIR = PROJECT_ROOT / "model_outputs"
+# Paths come from config.py (the dataset folder can be overridden with --data-path)
+from config import BASE_DIR as PROJECT_ROOT, DATASET_PATH as DATA_PATH, OUTPUT_DIR
 
 # Import custom modules
 try:
-    from config import DEVICE, set_seed
-    from utils import setup_logger
+    from config import DEVICE
+    from utils import set_seed, setup_logger
     from data import get_data_loaders, visualize_dataset_samples
     from model import FruitFreshnessClassifier, get_model_summary
     from trainer import train_model, evaluate_model
@@ -87,14 +85,10 @@ def train(args):
     """Train the model"""
     logger.info("Starting training mode")
 
-    # Update config with custom data path if provided
-    if args.data_path and args.data_path != str(DATA_PATH):
-        from config import config
-        config['dataset_path'] = args.data_path
-        logger.info(f"Using custom dataset path: {args.data_path}")
+    logger.info(f"Using dataset path: {args.data_path}")
 
     # Get data loaders
-    train_loader, val_loader, test_loader, class_names = get_data_loaders()
+    train_loader, val_loader, test_loader, class_names = get_data_loaders(dataset_path=args.data_path)
 
     # Visualize dataset samples if requested
     if args.visualize:
@@ -153,14 +147,10 @@ def evaluate(args):
         logger.error(f"Error loading model: {e}")
         return
 
-    # Update config with custom data path if provided
-    if args.data_path and args.data_path != str(DATA_PATH):
-        from config import config
-        config['dataset_path'] = args.data_path
-        logger.info(f"Using custom dataset path: {args.data_path}")
+    logger.info(f"Using dataset path: {args.data_path}")
 
     # Get data loaders
-    _, _, test_loader, class_names = get_data_loaders()
+    _, _, test_loader, class_names = get_data_loaders(dataset_path=args.data_path)
 
     # Evaluate model
     logger.info("Evaluating model on test set...")

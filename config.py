@@ -12,8 +12,10 @@ os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 # Basic config
 SEED = 42
-BASE_DIR = Path("C:/FreshHarvest")
-DATASET_PATH = BASE_DIR / "data" / "FreshHarvest_Dataset" / "FRUIT-16K"
+BASE_DIR = Path(__file__).resolve().parent
+# Dataset folder. Override with the FRESHHARVEST_DATA environment variable or --data-path.
+DATASET_PATH = Path(os.environ.get(
+    "FRESHHARVEST_DATA", BASE_DIR / "data" / "FreshHarvest_Dataset" / "FRUIT-16K"))
 OUTPUT_DIR = BASE_DIR / "model_outputs"
 LOGS_DIR = BASE_DIR / "logs"
 

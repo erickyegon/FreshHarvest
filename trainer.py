@@ -245,7 +245,7 @@ def train_model(model, train_loader, val_loader, num_epochs=NUM_EPOCHS,
     # Initialize criterion, optimizer, and scheduler
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
-    scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=3, verbose=True)
+    scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=3)
 
     # Create model checkpoint directory
     timestamp = get_timestamp_str()
